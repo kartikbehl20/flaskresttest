@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   run-tests:
       docker:
-        - image : circleci/python3.9
+        - image : circleci/python3.7.4
       steps:
         - checkout
         - run:
