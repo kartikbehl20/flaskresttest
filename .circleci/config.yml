@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  setup:
+  build_and_execute:
       working_directory: ~/practice_circleci
       docker:
         - image : circleci/python:3.9
@@ -11,23 +11,14 @@ jobs:
             command: |
               echo 'export PATH=$PATH:~/.local/bin' >> $BASH_ENV  && source $BASH_ENV
               pip install --user -r requirements.txt
-  execute:
-      working_directory: ~/practice_circleci
-      docker:
-        - image: circleci/python:3.9
-      steps:
         - run:
-            name: run unit test
+            name: run application
             command: |
               python testrestapi.py
-
 workflows:
   install_and_run:
     jobs:
-      - setup
-      - execute:
-          requires:
-             - setup
+      - build_and_execute
 
 
 
