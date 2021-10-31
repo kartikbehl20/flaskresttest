@@ -1,7 +1,9 @@
 version: 2.1
 jobs:
   setup:
+      working_directory: ~/practice_circleci
       docker:
+        - name : mycontainer
         - image : circleci/python:3.9
       steps:
         - checkout
@@ -14,7 +16,9 @@ jobs:
     steps:
       - run:
           name: run unit test
-          command: python testrestapi.py
+          command: |
+            docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mycontainer
+            python testrestapi.py
 
 workflows:
   install_and_run:

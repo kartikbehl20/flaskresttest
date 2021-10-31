@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import request,Api,Resource
 import json
+import os
 app = Flask(__name__)
 user_data = [{'id': 1, 'email': 'george.bluth@reqres.in', 'first_name': 'George', 'last_name': 'Bluth', 'avatar': 'https://reqres.in/img/faces/1-image.jpg'},
               {'id': 2, 'email': 'janet.weaver@reqres.in', 'first_name': 'Janet', 'last_name': 'Weaver', 'avatar': 'https://reqres.in/img/faces/2-image.jpg'},
@@ -26,7 +27,7 @@ def book_id(bookid):
             return 'not found',400
 
 if __name__ == "__main__":
-    app.run(debug=True,host="localhost")
+    app.run(debug=True,host="0.0.0.0")
 
 
 
