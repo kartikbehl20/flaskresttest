@@ -1,0 +1,23 @@
+version: 2.1
+jobs:
+  run-tests:
+      docker:
+        - image : circleci/python3.9
+      steps:
+        - checkout #git checkout
+        - run:
+            name: installing python dependencies
+            command: |
+              echo 'export PATH=$PATH:~/.local/bin' >> $BASH_ENV  && source $BASH_ENV
+              pip install --user -r requirements.txt
+        -run:
+          name: run unit test
+          command: python testrestapi.py
+
+workflows:
+  install_and_run:
+    jobs:
+      - run-tests
+
+
+
